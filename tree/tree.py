@@ -7,10 +7,10 @@
 # @Software: PyCharm
 
 class Node(object):
-    def __init__(self, value, left_child=None, right_child=None):
+    def __init__(self, value, left_child_node=None, right_child_node=None):
         self.value = value
-        self.left_child = left_child
-        self.right_child = right_child
+        self.left_child_node = left_child_node
+        self.right_child_node = right_child_node
 
         # def __str__(self):
         #     print '节点值为 ：' + str(self.value)
@@ -25,10 +25,10 @@ class Tree(object):
         right_child_value = raw_input('请输入右子节点值：')
         if left_child_value is not None and left_child_value.lower() != 'none':
             left_child_node = Node(left_child_value)
-            node.left_child = self.add_node(left_child_node)
+            node.left_child_node = self.add_node(left_child_node)
         if right_child_value is not None and right_child_value.lower() != 'none':
             right_child_node = Node(right_child_value)
-            node.right_child = self.add_node(right_child_node)
+            node.right_child_node = self.add_node(right_child_node)
         return node
 
     # 添加节点
@@ -44,18 +44,18 @@ class Tree(object):
         while True:
             current_node = tree_list.pop(0)
             # 若左节点为空，则添加该子节点
-            if current_node.left_child is None:
-                current_node.left_child = created_node
+            if current_node.left_child_node is None:
+                current_node.left_child_node = created_node
                 return
             # 若左节点不为空，则将左节点添加进tree_list
             else:
-                tree_list.append(current_node.left_child)
+                tree_list.append(current_node.left_child_node)
 
-            if current_node.right_child is None:
-                current_node.right_child = created_node
+            if current_node.right_child_node is None:
+                current_node.right_child_node = created_node
                 return
             else:
-                tree_list.append(current_node.right_child)
+                tree_list.append(current_node.right_child_node)
 
     # 深度优先搜索（先序，后序，中序）
     # 先序
@@ -63,22 +63,22 @@ class Tree(object):
         if node is None:
             return
         print node.value,
-        self.preorder_traversal(node.left_child)
-        self.preorder_traversal(node.right_child)
+        self.preorder_traversal(node.left_child_node)
+        self.preorder_traversal(node.right_child_node)
 
     # 中序
     def inorder_traversal(self, node):
         if node is None:
             return
-        self.inorder_traversal(node.left_child)
+        self.inorder_traversal(node.left_child_node)
         print node.value,
-        self.inorder_traversal(node.right_child)
+        self.inorder_traversal(node.right_child_node)
 
     def postorder_traversal(self, node):
         if node is None:
             return
-        self.postorder_traversal(node.left_child)
-        self.postorder_traversal(node.right_child)
+        self.postorder_traversal(node.left_child_node)
+        self.postorder_traversal(node.right_child_node)
         print node.value,
 
     # 广度优先搜索
@@ -93,10 +93,10 @@ class Tree(object):
         while len(queue):
             current_node = queue.pop(0)
             print current_node.value,
-            if current_node.left_child is not None:
-                queue.append(current_node.left_child)
-            if current_node.right_child is not None:
-                queue.append(current_node.right_child)
+            if current_node.left_child_node is not None:
+                queue.append(current_node.left_child_node)
+            if current_node.right_child_node is not None:
+                queue.append(current_node.right_child_node)
 
 
 if __name__ == "__main__":

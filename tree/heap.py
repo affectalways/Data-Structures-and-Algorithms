@@ -58,10 +58,12 @@ class Heap(object):
                 break
 
     # 堆排序,这需要在最小堆创建之后执行
+    # 由排序过程可见，若想得到升序（由小到大），则建立大顶堆，若想得到降序(由大到小)，则建立小顶堆。
     def heap_sort(self, heap):
         heap_len = len(heap) - 1
+        # 将根节点放到最终位置，剩余无序序列继续堆排序
         while heap_len > 0:
-            heap[0], heap[heap_len] = heap[heap_len], heap[0]
+            heap[0].value, heap[heap_len].value = heap[heap_len].value, heap[0].value
             self.downward_adjustment(heap[:heap_len], 0)
             heap_len -= 1
         return heap
@@ -181,8 +183,10 @@ if __name__ == "__main__":
     for node in created_heap:
         print node.value,
     print '\n'
+    print '堆排序：'
     sorted_heap = heap.heap_sort(created_heap)
     for item in sorted_heap:
         print item.value,
+
 
 # heap.downward_adjustment()
